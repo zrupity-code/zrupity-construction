@@ -206,19 +206,170 @@
     lb.classList.add('is-open');
     lb.setAttribute('aria-hidden', 'false');
   };
-  $$('[data-lightbox]').forEach((el) => el.addEventListener('click', () => {
+  const lbOpenFrom = (el) => {
     if (el.classList.contains('build__stage')) {
       const step = buildSteps[current];
       openLb(buildImgs[current].src, `${$('.build__num', step).textContent}. ${$('strong', step).textContent}`);
     } else {
-      openLb(el.dataset.img, $('strong', el).textContent);
+      openLb(el.dataset.img, el.dataset.caption || $('strong', el).textContent);
     }
-  }));
+  };
+  $$('[data-lightbox]').forEach((el) => {
+    el.addEventListener('click', () => lbOpenFrom(el));
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lbOpenFrom(el); }
+    });
+  });
   $('#lightbox-close').addEventListener('click', closeLb);
   lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+
+  /* ---------- Détail d'un métier ---------- */
+  const SERVICES = {
+    maconnerie: {
+      eyebrow: 'Gros œuvre',
+      title: 'Maçonnerie & gros œuvre',
+      img: 'images/metier-maconnerie.jpg',
+      intro: "Le gros œuvre, c'est tout ce qui fait tenir la maison debout. Nos maçons réalisent les fondations, les murs et les dalles en suivant les plans et l'étude de sol, avec des contrôles à chaque étape avant de passer à la suivante.",
+      list: ['Fondations, semelles et longrines', 'Murs porteurs en parpaing, brique ou béton cellulaire', 'Dalles, planchers et chapes', 'Béton armé : poteaux, poutres, linteaux', 'Ouverture de murs porteurs avec pose de poutre', 'Murets, murs de clôture et de soutènement'],
+      facts: [['Délai indicatif', '3 à 8 semaines selon le projet'], ['Garantie', 'Décennale sur la structure'], ['Devis', 'Gratuit, sous 48 h après la visite']],
+      projet: 'Gros œuvre',
+    },
+    toiture: {
+      eyebrow: 'Charpente et couverture',
+      title: 'Toiture',
+      img: 'images/metier-toiture.jpg',
+      intro: "Une toiture en bon état protège toute la maison. Nous intervenons en neuf comme en rénovation : diagnostic de la charpente, remplacement des tuiles ou ardoises, étanchéité des toits plats et évacuation des eaux de pluie.",
+      list: ['Charpente traditionnelle et fermettes', 'Couverture tuiles, ardoises et bac acier', 'Étanchéité des toitures terrasses', 'Zinguerie : gouttières, descentes, noues', 'Isolation de toiture et sarking', 'Pose de fenêtres de toit et réparations après tempête'],
+      facts: [['Délai indicatif', '1 à 4 semaines'], ['Garantie', 'Décennale sur couverture et étanchéité'], ['Diagnostic', 'Inspection de toiture offerte']],
+      projet: 'Toiture',
+    },
+    amenagement: {
+      eyebrow: 'Second œuvre',
+      title: 'Aménagement intérieur',
+      img: 'images/metier-amenagement.jpg',
+      intro: "Une fois les murs montés, nous rendons les pièces agréables à vivre : cloisons, isolation, sols et finitions. Vous choisissez les matériaux avec nous, et un seul chef d'équipe coordonne tous les artisans.",
+      list: ['Cloisons, doublages et faux plafonds en plaques de plâtre', 'Isolation thermique et phonique', 'Enduits, peinture et revêtements muraux', 'Carrelage, faïence et parquet', 'Création de salles de bains et cuisines', 'Aménagement de combles et de sous-sols'],
+      facts: [['Délai indicatif', '2 à 6 semaines par étage'], ['Garantie', 'Parfait achèvement 1 an, biennale 2 ans'], ['Conseil', 'Choix des matériaux en showroom']],
+      projet: 'Aménagement intérieur',
+    },
+    terrassement: {
+      eyebrow: 'Préparation du terrain',
+      title: 'Terrassement',
+      img: 'images/metier-terrassement.jpg',
+      intro: "Avant de construire, il faut un terrain propre, plat et raccordé. Nos équipes et nos engins préparent la parcelle, creusent les fondations et amènent l'eau, l'électricité et l'assainissement jusqu'à la maison.",
+      list: ['Décapage, nivellement et remblaiement', 'Fouilles pour fondations et sous-sols', 'Tranchées pour réseaux (eau, électricité, fibre)', 'Viabilisation et raccordement au tout-à-l\'égout', 'Assainissement individuel', 'Drainage, accès et plateformes de chantier'],
+      facts: [['Délai indicatif', '1 à 3 semaines'], ['Matériel', 'Pelles et engins de notre propre parc'], ['Études', 'Coordination avec l\'étude de sol']],
+      projet: 'Terrassement',
+    },
+    renovation: {
+      eyebrow: 'Rénovation',
+      title: 'Rénovation',
+      img: 'images/equipe-enduit.jpg',
+      intro: "Redonner vie à un bâtiment ancien, agrandir sa maison ou réduire ses factures d'énergie : nous étudions l'existant, vous proposons les travaux utiles et les réalisons en limitant la gêne si vous vivez sur place.",
+      list: ['Rénovation complète de maisons et appartements', 'Extension de plain-pied ou à étage', 'Surélévation', 'Rénovation énergétique : isolation, ravalement, menuiseries', 'Mise aux normes électriques et accessibilité', 'Réhabilitation de bâtiments anciens'],
+      facts: [['Délai indicatif', 'Selon l\'ampleur, planning remis avec le devis'], ['Aides', 'Accompagnement pour les aides à la rénovation'], ['Chantier', 'Possible en site occupé']],
+      projet: 'Rénovation',
+    },
+    neuve: {
+      eyebrow: 'Clés en main',
+      title: 'Construction neuve',
+      img: 'images/etape-4-maison-finie.jpg',
+      intro: "De la première esquisse à la remise des clés, nous construisons votre maison ou votre local professionnel. Un interlocuteur unique suit le projet, les délais et le budget sont fixés dès le départ.",
+      list: ['Maisons individuelles sur plan ou sur mesure', 'Locaux professionnels et commerces', 'Aide au dépôt du permis de construire', 'Gestion de tous les corps de métier', 'Réunions de chantier et comptes rendus réguliers', 'Réception des travaux et levée des réserves'],
+      facts: [['Délai indicatif', '8 à 12 mois pour une maison'], ['Garanties', 'Décennale, biennale et parfait achèvement'], ['Suivi', 'Un conducteur de travaux dédié']],
+      projet: 'Construction neuve',
+    },
+    'tous-travaux': {
+      eyebrow: 'Interlocuteur unique',
+      title: 'Tous travaux du bâtiment',
+      img: 'images/showroom.jpg',
+      intro: "Vous avez un projet qui mélange plusieurs métiers ? Nous coordonnons l'ensemble des artisans pour vous : un seul contact, un seul devis, un seul planning, et personne à relancer.",
+      list: ['Coordination de tous les corps de métier', 'Planning global et suivi du chantier', 'Menuiseries intérieures et extérieures', 'Électricité, plomberie et chauffage via nos partenaires', 'Aménagements extérieurs : terrasses, clôtures, allées', 'Dépannages et petits travaux'],
+      facts: [['Contact', 'Un chef de projet unique'], ['Devis', 'Un seul devis détaillé par poste'], ['Garantie', 'Décennale sur l\'ensemble des travaux']],
+      projet: 'Autre',
+    },
+  };
+
+  const sm = $('#service-modal');
+  const smMedia = $('#sm-media');
+  const projetSelect = $('#projet');
+  let smCurrent = null;
+  let smReturnFocus = null;
+
+  const openService = (key, trigger) => {
+    const s = SERVICES[key];
+    if (!s) return;
+    smCurrent = s;
+    smReturnFocus = trigger;
+    smMedia.style.backgroundImage = `url('${s.img}'), var(--photo-fallback)`;
+    smMedia.setAttribute('aria-label', `Agrandir la photo : ${s.title}`);
+    $('#sm-eyebrow').textContent = s.eyebrow;
+    $('#sm-title').textContent = s.title;
+    $('#sm-intro').textContent = s.intro;
+    $('#sm-list').innerHTML = '';
+    s.list.forEach((item) => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      $('#sm-list').appendChild(li);
+    });
+    $('#sm-facts').innerHTML = '';
+    s.facts.forEach(([label, value]) => {
+      const row = document.createElement('div');
+      const dt = document.createElement('dt');
+      const dd = document.createElement('dd');
+      dt.textContent = label;
+      dd.textContent = value;
+      row.append(dt, dd);
+      $('#sm-facts').appendChild(row);
+    });
+    $('.service-modal__panel', sm).scrollTop = 0;
+    sm.classList.add('is-open');
+    sm.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    $('#sm-close').focus();
+  };
+  const closeService = (restoreFocus = true) => {
+    if (!sm.classList.contains('is-open')) return;
+    sm.classList.remove('is-open');
+    sm.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if (restoreFocus && smReturnFocus) smReturnFocus.focus({ preventScroll: true });
+  };
+
+  $$('[data-service]').forEach((card) => {
+    card.addEventListener('click', () => openService(card.dataset.service, card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openService(card.dataset.service, card); }
+    });
+  });
+  $('#sm-close').addEventListener('click', () => closeService());
+  sm.addEventListener('click', (e) => { if (e.target === sm) closeService(); });
+  smMedia.addEventListener('click', () => { if (smCurrent) openLb(smCurrent.img, smCurrent.title); });
+  $('#sm-back').addEventListener('click', () => {
+    closeService(false);
+    $('#services').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+  // le bouton devis préremplit le type de projet puis descend au formulaire
+  $('#sm-cta').addEventListener('click', () => {
+    if (smCurrent) projetSelect.value = smCurrent.projet;
+    closeService(false);
+    setTimeout(() => $('#nom')?.focus({ preventScroll: true }), 700);
+  });
+
+  // garde le focus clavier à l'intérieur de la fenêtre ouverte
+  sm.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = $$('button, a[href]', sm);
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
-    closeLb();
+    // ferme d'abord la photo agrandie si elle est par-dessus la fenêtre
+    if (lb.classList.contains('is-open')) { closeLb(); return; }
+    closeService();
     setMenu(false);
   });
 

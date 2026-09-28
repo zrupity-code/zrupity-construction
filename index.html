@@ -85,8 +85,8 @@
     <section class="section about" id="apropos">
       <div class="container about__grid">
         <div class="about__media reveal">
-          <div class="about__img about__img--main photo" style="background-image: url('images/equipe-maconnerie.jpg'), var(--photo-fallback)"></div>
-          <div class="about__img about__img--small photo" style="background-image: url('images/showroom.jpg'), var(--photo-fallback)"></div>
+          <div class="about__img about__img--main photo" data-lightbox data-img="images/equipe-maconnerie.jpg" data-caption="Nos équipes de maçonnerie" tabindex="0" role="button" aria-label="Agrandir la photo : nos équipes de maçonnerie" style="background-image: url('images/equipe-maconnerie.jpg'), var(--photo-fallback)"></div>
+          <div class="about__img about__img--small photo" data-lightbox data-img="images/showroom.jpg" data-caption="Notre agence et notre showroom" tabindex="0" role="button" aria-label="Agrandir la photo : notre agence et notre showroom" style="background-image: url('images/showroom.jpg'), var(--photo-fallback)"></div>
           <div class="about__badge">
             <strong>15</strong>
             <span>ans de savoir-faire</span>
@@ -166,7 +166,7 @@
         </div>
 
         <div class="services__featured">
-          <article class="card card--photo reveal">
+          <article class="card card--photo reveal card--link" data-service="maconnerie" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Maçonnerie et gros œuvre : voir le détail">
             <div class="card__media photo" style="background-image: url('images/metier-maconnerie.jpg'), var(--photo-fallback)"></div>
             <div class="card__body">
               <div class="card__icon">
@@ -174,9 +174,10 @@
               </div>
               <h3 class="card__title">Maçonnerie &amp; gros œuvre</h3>
               <p>Fondations, murs porteurs, béton armé et dalles&nbsp;: des bases solides pour vos projets.</p>
+              <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
             </div>
           </article>
-          <article class="card card--photo reveal">
+          <article class="card card--photo reveal card--link" data-service="toiture" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Toiture : voir le détail">
             <div class="card__media photo" style="background-image: url('images/metier-toiture.jpg'), var(--photo-fallback)"></div>
             <div class="card__body">
               <div class="card__icon">
@@ -184,9 +185,10 @@
               </div>
               <h3 class="card__title">Toiture</h3>
               <p>Charpente, couverture, étanchéité et zinguerie&nbsp;: une protection durable pour votre maison.</p>
+              <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
             </div>
           </article>
-          <article class="card card--photo reveal">
+          <article class="card card--photo reveal card--link" data-service="amenagement" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Aménagement intérieur : voir le détail">
             <div class="card__media photo" style="background-image: url('images/metier-amenagement.jpg'), var(--photo-fallback)"></div>
             <div class="card__body">
               <div class="card__icon">
@@ -194,9 +196,10 @@
               </div>
               <h3 class="card__title">Aménagement intérieur</h3>
               <p>Plâtrerie, isolation, enduits, carrelage et peinture&nbsp;: des espaces modernes et à votre image.</p>
+              <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
             </div>
           </article>
-          <article class="card card--photo reveal">
+          <article class="card card--photo reveal card--link" data-service="terrassement" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Terrassement : voir le détail">
             <div class="card__media photo" style="background-image: url('images/metier-terrassement.jpg'), var(--photo-fallback)"></div>
             <div class="card__body">
               <div class="card__icon">
@@ -204,31 +207,35 @@
               </div>
               <h3 class="card__title">Terrassement</h3>
               <p>Préparation du terrain, fouilles, tranchées et viabilisation&nbsp;: le point de départ de votre projet.</p>
+              <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
             </div>
           </article>
         </div>
 
         <div class="services__grid">
-          <article class="card reveal">
+          <article class="card reveal card--link" data-service="renovation" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Rénovation : voir le détail">
             <div class="card__icon">
               <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z"/></svg>
             </div>
             <h3 class="card__title">Rénovation</h3>
             <p>Réhabilitation complète, extension, surélévation et mise aux normes énergétiques.</p>
+            <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
           </article>
-          <article class="card reveal">
+          <article class="card reveal card--link" data-service="neuve" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Construction neuve : voir le détail">
             <div class="card__icon">
               <svg viewBox="0 0 24 24"><path d="M3 21V10l9-7 9 7v11h-6v-6H9v6H3z"/></svg>
             </div>
             <h3 class="card__title">Construction neuve</h3>
             <p>Maisons individuelles et bâtiments professionnels, livrés clés en main.</p>
+            <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
           </article>
-          <article class="card reveal">
+          <article class="card reveal card--link" data-service="tous-travaux" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Tous travaux du bâtiment : voir le détail">
             <div class="card__icon">
               <svg viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v2H2v3h20v-3h-2v-2a8 8 0 0 0-8-8zm-1 2.1V10h2V5.1a6 6 0 0 1 5 5.9v2H6v-2a6 6 0 0 1 5-5.9zM4 18h16v2H4z"/></svg>
             </div>
             <h3 class="card__title">Tous travaux du bâtiment</h3>
             <p>Un interlocuteur unique qui coordonne l'ensemble des corps de métier.</p>
+            <span class="card__more">En savoir plus <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.3 19.9 12l-6.7 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
           </article>
         </div>
       </div>
@@ -298,15 +305,15 @@
         </div>
 
         <div class="onsite__grid">
-          <figure class="project reveal" data-lightbox data-img="images/equipe-toiture.jpg">
+          <figure class="project reveal" data-lightbox tabindex="0" role="button" data-img="images/equipe-toiture.jpg">
             <div class="project__img photo" style="background-image: url('images/equipe-toiture.jpg'), var(--photo-fallback)"></div>
             <figcaption><span>Toiture</span><strong>Pose de couverture</strong></figcaption>
           </figure>
-          <figure class="project reveal" data-lightbox data-img="images/equipe-enduit.jpg">
+          <figure class="project reveal" data-lightbox tabindex="0" role="button" data-img="images/equipe-enduit.jpg">
             <div class="project__img photo" style="background-image: url('images/equipe-enduit.jpg'), var(--photo-fallback)"></div>
             <figcaption><span>Aménagement</span><strong>Enduits et finitions</strong></figcaption>
           </figure>
-          <figure class="project reveal" data-lightbox data-img="images/equipe-terrassement.jpg">
+          <figure class="project reveal" data-lightbox tabindex="0" role="button" data-img="images/equipe-terrassement.jpg">
             <div class="project__img photo" style="background-image: url('images/equipe-terrassement.jpg'), var(--photo-fallback)"></div>
             <figcaption><span>Terrassement</span><strong>Fouilles et fondations</strong></figcaption>
           </figure>
@@ -433,6 +440,9 @@
               <option>Rénovation</option>
               <option>Extension / surélévation</option>
               <option>Gros œuvre</option>
+              <option>Toiture</option>
+              <option>Aménagement intérieur</option>
+              <option>Terrassement</option>
               <option>Local professionnel</option>
               <option>Autre</option>
             </select>
@@ -491,6 +501,33 @@
       <p><a href="#">Mentions légales</a>&nbsp;· <a href="#">Politique de confidentialité</a></p>
     </div>
   </footer>
+
+  <!-- Détail d'un métier -->
+  <div class="service-modal" id="service-modal" aria-hidden="true">
+    <div class="service-modal__panel" role="dialog" aria-modal="true" aria-labelledby="sm-title">
+      <button class="service-modal__close" id="sm-close" aria-label="Fermer">×</button>
+      <div class="service-modal__media photo" id="sm-media"></div>
+      <div class="service-modal__body">
+        <p class="eyebrow" id="sm-eyebrow">Nos métiers</p>
+        <h3 class="service-modal__title" id="sm-title"></h3>
+        <p class="service-modal__intro" id="sm-intro"></p>
+        <div class="service-modal__cols">
+          <div>
+            <h4>Ce que nous réalisons</h4>
+            <ul class="checklist service-modal__list" id="sm-list"></ul>
+          </div>
+          <div>
+            <h4>Bon à savoir</h4>
+            <dl class="service-modal__facts" id="sm-facts"></dl>
+          </div>
+        </div>
+        <div class="service-modal__actions">
+          <a href="#contact" class="btn btn--primary" id="sm-cta">Demander un devis</a>
+          <button type="button" class="btn btn--outline" id="sm-back">Voir les autres métiers</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Aperçu de la réalisation">
